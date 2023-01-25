@@ -1,11 +1,9 @@
 <template>
-    <div class="main">
-        <div class="icondiv">
-            <font-awesome-icon class="icon" icon="fa-solid fa-arrow-left" />
-        </div>
-        <div class="icondiv">
-            <font-awesome-icon class="icon" icon="fa-solid fa-arrow-right" />
-        </div>
+    <div class="left-icon-div">
+        <font-awesome-icon class="icon" icon="fa-solid fa-chevron-left" />
+    </div>
+    <div class="right-icon-div">
+        <font-awesome-icon class="icon" icon="fa-solid fa-chevron-right" />
     </div>
 </template>
 
@@ -14,23 +12,33 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* Why this component's parent is not MainBoard? */
-.main {
-    overflow: hidden;
-    background-color: transparent;
+
+@mixin icon-div {
     display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 1.25rem;
+    background-color: black;
+    border-radius: 50%;
+
+}
+
+.left-icon-div {
+    @include icon-div;
+    top: 0.6rem;
     left: 2rem;
 }
 
-.icondiv {
-    border-radius: 50%;
+.right-icon-div {
+    @include icon-div;
+    top: 0.6rem;
+    left: 6rem;
 }
 
 .icon {
-    margin: 0.8rem;
+    margin: 0.6rem 0.8rem 0.6rem 0.8rem;
     color: aliceblue;
 }
 </style>
