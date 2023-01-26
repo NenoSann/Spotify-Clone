@@ -11,12 +11,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faDoorOpen, faMagnifyingGlass, faRecordVinyl, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faDoorOpen, faMagnifyingGlass, faRecordVinyl, faChevronLeft, faChevronRight, faSortDown } from '@fortawesome/free-solid-svg-icons'
 library.add(faDoorOpen,
     faMagnifyingGlass,
     faRecordVinyl,
     faChevronLeft,
-    faChevronRight);
+    faChevronRight,
+    faSortDown);
 const app = createApp(App);
 
 app.use(router, ElementPlus);
