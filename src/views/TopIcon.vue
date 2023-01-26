@@ -22,18 +22,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     position: absolute;
     background-color: black;
     border-radius: 50%;
-
+    transform: translateY(-50%)
 }
 
 .left-icon-div {
     @include icon-div;
-    top: 0.6rem;
+    top: 1.6rem;
     left: 2rem;
 }
 
 .right-icon-div {
     @include icon-div;
-    top: 0.6rem;
+    top: 1.6rem;
     left: 6rem;
 }
 
