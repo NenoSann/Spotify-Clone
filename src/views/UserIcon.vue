@@ -1,25 +1,20 @@
 <template>
     <div class="user-icon">
-        <img class="user-image" :src="userImage" decoding="async">
-        <span class="user-name">{{ userName }}</span>
-        <font-awesome-icon class="icon" icon="fa-solid fa-sort-down" />
+        <img class="user-image" :src="props.userinfo.imageURL.value" decoding="async">
+        <span class="user-name">{{ props.userinfo.username.value }}</span>
+        <font-awesome-icon class="icon-image" icon="fa-solid fa-sort-down" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { ref } from "vue"
-const props = defineProps({
-    userName: String,
-    userImage: String,
-});
+const props = defineProps(['userinfo']);
 
-const background_color = ref("#000");
 </script>
 
 <style scoped lang="scss">
 $base-background-color: #000;
-$hover-background-color: #000;
+$hover-background-color: rgb(47, 44, 44);
 
 .user-icon {
     overflow: hidden;
@@ -34,6 +29,17 @@ $hover-background-color: #000;
     top: 1.6rem;
     right: 2rem;
     transform: translateY(-50%);
+
+    // hover animation
+    transition-property: background-color border;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+}
+
+.user-icon:hover {
+    cursor: pointer;
+    background-color: $hover-background-color;
+    border-color: $hover-background-color;
 }
 
 .user-image {
@@ -41,7 +47,8 @@ $hover-background-color: #000;
     width: 2rem;
 }
 
-.icon {
+.icon-image {
+    background-color: inherit;
     padding-right: 0.6rem;
     color: white;
     margin-top: -6px;
@@ -49,6 +56,7 @@ $hover-background-color: #000;
 }
 
 .user-name {
+    background-color: inherit;
     margin-left: 1rem;
     margin-right: 1rem;
     color: white;

@@ -17,5 +17,6 @@ import { ref, computed } from 'vue';
 #main {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
 }
 </style>
