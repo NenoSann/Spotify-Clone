@@ -3,22 +3,27 @@
         <!-- Consider to wrap this two component into one block component? -->
         <TopIcon :userinfo="userinfo"></TopIcon>
         <Greeting></Greeting>
+        <Recommadation></Recommadation>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Ref } from 'vue';
 import type { UserInfo } from '@/lib/interface';
 import TopIcon from './TopIcon.vue';
 import Greeting from './Greeting.vue';
+import Recommadation from './SongTab/Recommadation.vue';
 // Store the user info into variable
 
-let userinfo: UserInfo = {
+const userinfo: UserInfo = {
     imageURL: ref('src/assets/image/userImage.png'),
     username: ref('NenoSan'),
 }
 
+const recommandation = {
+    songName: "ZUTOMAYO",
+    songImage: "src/assets/image/userImage.png",
+}
 
 </script>
 

@@ -25,6 +25,7 @@ function getGreeting(): string {
 
 <style scoped lang="scss">
 .greeting {
+    white-space: nowrap;
     background-color: transparent;
     color: white;
     margin-left: 2rem;
