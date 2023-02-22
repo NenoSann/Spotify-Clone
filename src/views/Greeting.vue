@@ -32,5 +32,6 @@ function getGreeting(): string {
     font-size: 2.6rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
+    margin-bottom: 1.2rem;
 }
 </style>

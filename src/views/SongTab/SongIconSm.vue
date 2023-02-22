@@ -19,6 +19,10 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
+* {
+    user-select: none;
+}
+
 .song-icon-main {
     overflow: hidden;
     background-color: transparent;
@@ -55,7 +59,6 @@ const props = defineProps({
     color: #1db954;
     font-size: 48px;
     background: transparent;
-
 }
 
 .song-text {

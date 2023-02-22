@@ -3,7 +3,8 @@
         <!-- Consider to wrap this two component into one block component? -->
         <TopIcon :userinfo="userinfo"></TopIcon>
         <Greeting></Greeting>
-        <Recommadation></Recommadation>
+        <Recommendation></Recommendation>
+        <Section section-text="Made For NenoSan"></Section>
     </div>
 </template>
 
@@ -12,7 +13,8 @@ import { ref } from 'vue';
 import type { UserInfo } from '@/lib/interface';
 import TopIcon from './TopIcon.vue';
 import Greeting from './Greeting.vue';
-import Recommadation from './SongTab/Recommadation.vue';
+import Recommendation from './SongTab/Recommendation.vue';
+import Section from './SongTab/Section.vue';
 // Store the user info into variable
 
 const userinfo: UserInfo = {

@@ -1,5 +1,5 @@
 <template>
-    <div class="recommandation-main">
+    <div class="recommendation-main">
         <SongIconSm v-for="(songInfo, index) in songInfos" :key="index" :component-name="songInfo.songName"
             :component-image="songInfo.songImage"></SongIconSm>
     </div>
@@ -20,7 +20,7 @@ let songInfos = [
 </script>
 
 <style scoped>
-.recommandation-main {
+.recommendation-main {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
