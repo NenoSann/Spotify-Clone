@@ -45,6 +45,9 @@ let songIconInfo = [{
     artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
 },
 ]
+
+
+
 </script>
 
 <style lang='scss' scoped>
@@ -53,12 +56,14 @@ let songIconInfo = [{
 }
 
 .section {
-
+    height: 280px;
     overflow-y: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     margin-left: 2rem;
+    margin-right: 2rem;
     column-gap: 1rem;
     // overflow-y: hidden;
 }

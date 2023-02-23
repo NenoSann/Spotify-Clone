@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const props = defineProps<IProps>();
 
@@ -25,6 +25,7 @@ const artistString = computed(() => {
         return (props.artist[0] + ', ' + props.artist[1] + ', ' + props.artist[2] + ' And More');
     }
 })
+
 </script>
 
 
@@ -34,6 +35,9 @@ const artistString = computed(() => {
 }
 
 .container {
+    cursor: pointer;
+    margin-bottom: 20rem;
+    max-width: 200px;
     flex: 1 1 10rem;
     background-color: rgba($color: white, $alpha: 0.1);
     width: 10rem;
@@ -41,6 +45,21 @@ const artistString = computed(() => {
     flex-direction: column;
     padding: 10px 10px 10px 10px;
     border-radius: 10px;
+
+    &:hover {
+        background-color: rgba($color: white, $alpha: .3);
+        transition: background-color .3s;
+    }
+
+    &:not(:hover) {
+        background-color: rgba($color: white, $alpha: .1);
+        transition: background-color .3s;
+    }
+
+    &:active {
+        background-color: rgba($color: white, $alpha: .3);
+        transition: background-color .1.2s;
+    }
 }
 
 img {

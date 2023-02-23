@@ -4,27 +4,22 @@
         <TopIcon :userinfo="userinfo"></TopIcon>
         <Greeting></Greeting>
         <Recommendation></Recommendation>
-        <Section section-text="Made For NenoSan"></Section>
+        <MusicSection section-text="Made For NenoSan" ref="section"></MusicSection>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import type { UserInfo } from '@/lib/interface';
 import TopIcon from './TopIcon.vue';
 import Greeting from './Greeting.vue';
 import Recommendation from './SongTab/Recommendation.vue';
-import Section from './SongTab/Section.vue';
+import MusicSection from './SongTab/MusicSection.vue';
 // Store the user info into variable
 
 const userinfo: UserInfo = {
     imageURL: ref('src/assets/image/userImage.png'),
     username: ref('NenoSan'),
-}
-
-const recommandation = {
-    songName: "ZUTOMAYO",
-    songImage: "src/assets/image/userImage.png",
 }
 
 </script>

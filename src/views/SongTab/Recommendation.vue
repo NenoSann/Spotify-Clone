@@ -27,5 +27,6 @@ let songInfos = [
     column-gap: 20px;
     background-color: transparent;
     margin-left: 2rem;
+    margin-right: 2rem;
 }
 </style>

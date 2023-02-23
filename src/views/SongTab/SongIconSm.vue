@@ -30,13 +30,13 @@ const props = defineProps({
 
     &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.5);
-        transition: background-color .5s ease-in-out;
+        transition: background-color .25s ease-in-out;
         cursor: pointer;
     }
 
     &:not(:hover) {
         background-color: transparent;
-        transition: background-color .5s ease-in-out;
+        transition: background-color .25s ease-in-out;
     }
 }
 
