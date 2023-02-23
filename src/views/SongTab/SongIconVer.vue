@@ -34,6 +34,7 @@ const artistString = computed(() => {
 }
 
 .container {
+    flex: 1 1 10rem;
     background-color: rgba($color: white, $alpha: 0.1);
     width: 10rem;
     display: flex;
@@ -50,6 +51,7 @@ img {
     padding-top: 0.6rem;
     color: white;
     background-color: transparent;
+    font-family: 'Roboto', sans-serif;
 }
 
 .title {

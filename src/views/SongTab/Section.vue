@@ -4,7 +4,8 @@
             {{ text.sectionText }}
         </p>
         <div class="section">
-            <SongIconVer :image=songIconInfo.image :title=songIconInfo.title :artist=songIconInfo.artist></SongIconVer>
+            <SongIconVer v-for="(info, index) in songIconInfo" :key=index :image=info.image :title=info.title
+                :artist=info.artist></SongIconVer>
         </div>
     </div>
 </template>
@@ -13,11 +14,37 @@
 import SongIconVer from './SongIconVer.vue';
 const text = defineProps(['sectionText'])
 
-let songIconInfo = {
+let songIconInfo = [{
     image: 'src/assets/image/jacket_s_061.png',
     title: 'Daily Mix 3',
     artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-}
+},
+{
+    image: 'src/assets/image/jacket_s_061.png',
+    title: 'Daily Mix 3',
+    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
+},
+{
+    image: 'src/assets/image/jacket_s_061.png',
+    title: 'Daily Mix 3',
+    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
+},
+{
+    image: 'src/assets/image/jacket_s_061.png',
+    title: 'Daily Mix 3',
+    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
+},
+{
+    image: 'src/assets/image/jacket_s_061.png',
+    title: 'Daily Mix 3',
+    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
+},
+{
+    image: 'src/assets/image/jacket_s_061.png',
+    title: 'Daily Mix 3',
+    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
+},
+]
 </script>
 
 <style lang='scss' scoped>
@@ -26,7 +53,14 @@ let songIconInfo = {
 }
 
 .section {
+
+    overflow-y: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     margin-left: 2rem;
+    column-gap: 1rem;
+    // overflow-y: hidden;
 }
 
 .section-name {

@@ -14,8 +14,7 @@ let songInfos = [
     { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png" },
     { songName: "Potato", songImage: "src/assets/image/jacket_s_061.png" },
     { songName: "幽灵东京", songImage: "src/assets/image/jacket_s_102.png" },
-    { songName: "Cinema", songImage: "src/assets/image/jacket_s_126.png" },
-]
+    { songName: "Cinema", songImage: "src/assets/image/jacket_s_126.png" },]
 
 </script>
 
