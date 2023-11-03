@@ -2,8 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
-import "./assets/main.scss";
+
+// using compiled tailwindcss file
+import './style.css';
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -21,6 +22,7 @@ import {
     faSortDown,
     faCirclePlay,
 } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faDoorOpen,
     faMagnifyingGlass,
     faRecordVinyl,

@@ -23,10 +23,9 @@ function getGreeting(): string {
 
 </script>
 
-<style scoped lang="scss">
+<style>
 .greeting {
     white-space: nowrap;
-    background-color: transparent;
     color: white;
     margin-left: 2rem;
     font-size: 2.6rem;
