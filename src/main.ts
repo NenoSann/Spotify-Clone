@@ -1,15 +1,14 @@
 import { createApp } from "vue";
+import { pinia } from "./store/index";
 import App from "./App.vue";
 import router from "./router";
 import ElementPlus from 'element-plus';
-
 // using compiled tailwindcss file
 import './style.css';
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import font awesome icon component */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 
@@ -33,5 +32,5 @@ library.add(faDoorOpen,
 );
 const app = createApp(App);
 
-app.use(router, ElementPlus);
+app.use(pinia).use(ElementPlus).use(router);
 app.mount("#app");

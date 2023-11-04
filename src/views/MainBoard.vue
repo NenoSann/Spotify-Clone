@@ -9,14 +9,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
+import { accessToken } from "../store/index";
 import type { UserInfo } from '@/lib/interface';
 import TopIcon from './TopIcon.vue';
 import Greeting from './Greeting.vue';
 import Recommendation from './SongTab/Recommendation.vue';
 import MusicSection from './SongTab/MusicSection.vue';
+import { getUserProfile } from "../api/user/getUserProfile";
 // Store the user info into variable
-
 const userinfo: UserInfo = {
     imageURL: ref('src/assets/image/userImage.png'),
     username: ref('NenoSan'),

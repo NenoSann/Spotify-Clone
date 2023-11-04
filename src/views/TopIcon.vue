@@ -13,8 +13,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import UserIcon from './UserIcon.vue';
-import type { UserInfo } from '@/lib/interface';
-import { defineProps } from 'vue';
 const props = defineProps(['userinfo'])
 
 </script>

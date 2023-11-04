@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import SideBar from './views/SideBar.vue';
-import MainBoard from './views/MainBoard.vue';
-import { ref, computed } from 'vue';
-
-
+import homePage from './pages/homePage.vue';
+import loginPage from './pages/loginPage.vue';
+import { ref, computed, onBeforeMount } from 'vue';
+import { createAxiosInstance } from './api/index';
+import { accessToken } from './store';
 </script>
 
 <template>
   <div id="main">
-    <SideBar></SideBar>
-    <MainBoard class="mainboard"></MainBoard>
+    <router-view>
+    </router-view>
   </div>
 </template>
 
