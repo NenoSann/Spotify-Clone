@@ -25,11 +25,13 @@ function createAxiosInstance(token: string): Function {
     return getAxiosInstance;
 }
 
-const axiosInstance = axios.create();
+const axiosInstance = axios.create({
+    baseURL: 'https://api.spotify.com/v1/',
+});
 axiosInstance.interceptors.request.use((config) => {
     const tokenStore = accessToken();
-    config.headers['Authorization'] = tokenStore.accessToken.access_token;
+    config.headers['Authorization'] = `Bearer ${tokenStore.accessToken.access_token}`;
     return config;
 }, (err) => Promise.reject(err));
 
-export { createAxiosInstance, axiosInstance };
+export { axiosInstance };

@@ -10,11 +10,13 @@ import SideBar from '@/views/SideBar.vue';
 import MainBoard from '@/views/MainBoard.vue';
 import { onMounted } from 'vue';
 import { accessToken } from '../store/index'
-
+import { getUserProfile } from '../api/user/getUserProfile'
 const tokenStore = accessToken();
-onMounted(() => {
+onMounted(async () => {
     tokenStore.retriveCode();
     tokenStore.fetchAccessToken();
+    const userProfile = await getUserProfile();
+    console.log(userProfile)
 })
 </script>
 
