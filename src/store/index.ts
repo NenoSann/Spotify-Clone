@@ -1,5 +1,7 @@
 import { createPinia, defineStore } from "pinia";
 import { getAccessToken, getAccessToken_PKCE, retriveParams, type accessTokenBody, redirectToSpotify } from "@/api/user/getAccessToken";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const pinia = createPinia();
 const useUserStore = defineStore('user', {
     state: () => {
@@ -27,6 +29,9 @@ const accessToken = defineStore('accessToken', {
             if (this.accessToken !== null) {
                 if (Date.now() - new Date(this.accessToken.created_at).getTime() > this.accessToken.expires_in * 1000) {
                     // token has expired
+                    console.log(Date.now() - new Date(this.accessToken.created_at).getTime(), this.accessToken.expires_in * 1000)
+                    const componentStateStore = componentState();
+                    componentStateStore.redirect = true;
                     await this.requestPCKE_token();
                     console.log('Token expired,', this.accessToken)
                 }
@@ -35,7 +40,6 @@ const accessToken = defineStore('accessToken', {
                 await this.requestPCKE_token();
                 localStorage.setItem('accessToken', JSON.stringify(this.accessToken));
             }
-            console.log('token not expired')
         },
         async redirectToSpotify() {
             redirectToSpotify();
@@ -51,5 +55,10 @@ const accessToken = defineStore('accessToken', {
             }
         }
     }
+});
+const componentState = defineStore('componentState', {
+    state: () => ({
+        redirect: false,
+    }),
 })
-export { pinia, useUserStore, accessToken };
+export { pinia, useUserStore, accessToken, componentState };

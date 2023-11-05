@@ -12,10 +12,4 @@ import { accessToken } from './store';
   </div>
 </template>
 
-<style scoped>
-#main {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-</style>
+<style scoped></style>
