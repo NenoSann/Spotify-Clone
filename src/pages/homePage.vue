@@ -22,5 +22,7 @@ onMounted(async () => {
 .main {
     @apply flex-grow flex-shrink basis-auto;
     @apply min-w-0;
+    @apply relative;
+    @apply overflow-x-hidden;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="card-main">
         <div class="daisy-avatar">
-            <img :src="imageURL" class="rounded-full">
+            <img :src="image_url" class="rounded-full">
         </div>
         <p class=" font-semibold">{{ card_name }}</p>
         <p class=" font-light">{{ card_type }}</p>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-    imageURL: string,
+    image_url: string,
     card_type: string,
     card_name: string
 }>();

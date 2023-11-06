@@ -16,14 +16,18 @@
         </div>
         <div class="hot-artist">
             <p class="font-semibold text-2xl">本月热门艺人</p>
-            <p class="font-thin text-sm">仅自己可见</p>
+            <p class="font-light text-sm my-1">仅自己可见</p>
             <TheGallery>
                 <TheCard v-bind="card" v-for="card of artistCards">
                 </TheCard>
             </TheGallery>
         </div>
         <div class="hot-track">
-
+            <p class="font-semibold text-2xl">本月热门单曲</p>
+            <p class="font-thin text-sm my-1">仅自己可见</p>
+            <TheGallery>
+                <TheCard v-bind="card" v-for="card of trackCards"></TheCard>
+            </TheGallery>
         </div>
         <div class="open-list">
 
@@ -52,13 +56,22 @@ const artistCards = computed(() => {
     return topArtists.value?.map((artist) => {
         console.log('artists image', artist.images[0].url)
         return {
-            imageURL: artist.images[0].url,
+            image_url: artist.images[0].url,
             card_type: 'Artist',
             card_name: artist.name,
         }
     })
 });
-const trackCards = ref();
+const trackCards = computed(() => {
+    return topTracks.value?.map((track) => {
+        return {
+            image_url: track.album.images[0].url,
+            card_type: 'Track',
+            card_name: track.name
+        }
+    })
+})
+
 const cardProps = {
     imageURL: 'src/assets/image/jacket_s_090.png',
     card_type: 'track',
@@ -73,7 +86,7 @@ onMounted(async () => {
 
 <style scoped>
 .user-main {
-    @apply flex flex-col;
+    @apply flex flex-col gap-8;
     @apply p-6;
     @apply bg-gradient-to-b from-primary-focus to-accent;
     @apply text-amber-50;
