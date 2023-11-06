@@ -9,19 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { accessToken } from "../store/index";
-import type { UserInfo } from '@/lib/interface';
+import { ref, computed } from 'vue';
+import type { userProfile } from '@/lib/interface';
 import TopIcon from './TopIcon.vue';
 import Greeting from './Greeting.vue';
 import Recommendation from './SongTab/Recommendation.vue';
 import MusicSection from './SongTab/MusicSection.vue';
-import { getUserProfile } from "../api/user/getUserProfile";
+import { useUserStore } from '@/store';
+const userStore = useUserStore();
 // Store the user info into variable
-const userinfo: UserInfo = {
-    imageURL: ref('src/assets/image/userImage.png'),
-    username: ref('NenoSan'),
-}
+const userinfo: userProfile = userStore.userProfile;
 
 </script>
 

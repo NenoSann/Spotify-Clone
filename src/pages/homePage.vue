@@ -1,7 +1,6 @@
 <template>
     <div class="main">
-        <SideBar></SideBar>
-        <MainBoard class="mainboard"></MainBoard>
+        <router-view></router-view>
         <TheAlert></TheAlert>
     </div>
 </template>
@@ -11,20 +10,19 @@ import SideBar from '@/views/SideBar.vue';
 import MainBoard from '@/views/MainBoard.vue';
 import TheAlert from '@/views/component/TheAlert.vue'
 import { onMounted } from 'vue';
-import { accessToken } from '../store/index'
+import { accessToken, useUserStore } from '../store/index'
 import { getUserProfile } from '../api/user/getUserProfile'
 const tokenStore = accessToken();
+const userStore = useUserStore();
 onMounted(async () => {
     tokenStore.retriveCode();
     tokenStore.fetchAccessToken();
-    const userProfile = await getUserProfile();
-    console.log(userProfile)
+    userStore.fetchUserProfile();
 })
 </script>
 
 <style scoped>
 .main {
     @apply w-[100vw] h-[100vh];
-    @apply flex flex-row flex-nowrap;
 }
 </style>

@@ -1,15 +1,24 @@
 <template>
     <div class="user-icon">
-        <img class="user-image" :src="props.userinfo.imageURL.value" decoding="async">
-        <span class="user-name">{{ props.userinfo.username.value }}</span>
+        <div class="daisy-avatar">
+            <div class="w-8 rounded-full">
+                <img :src="userImageURL" decoding="async">
+            </div>
+        </div>
+        <span class="user-name">{{ userName }}</span>
         <font-awesome-icon class="icon-image" icon="fa-solid fa-sort-down" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-const props = defineProps(['userinfo']);
-
+import type { userProfile } from "@/lib/interface";
+// define props with typecheck, see:https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props
+const props = defineProps<{
+    userinfo?: userProfile
+}>();
+const userName = props.userinfo?.display_name;
+const userImageURL = props.userinfo?.images[1].url;
 </script>
 
 <style scoped lang="scss">
