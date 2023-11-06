@@ -1,8 +1,10 @@
 <template>
     <div class="top-bar">
-        <div class="left-icon-div">
-            <font-awesome-icon class="icon" icon="fa-solid fa-chevron-left" />
-        </div>
+        <router-link to="/">
+            <div class="left-icon-div">
+                <font-awesome-icon class="icon" icon="fa-solid fa-chevron-left" />
+            </div>
+        </router-link>
         <div class="right-icon-div">
             <font-awesome-icon class="icon" icon="fa-solid fa-chevron-right" />
         </div>

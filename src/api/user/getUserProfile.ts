@@ -5,7 +5,7 @@ import type { userProfile } from "@/lib/interface";
 // fetch the userProfile, the bearear is added by interceptor
 const getUserProfile = async function (): Promise<userProfile> {
     let userProfile: userProfile = (await axiosInstance.get('/me')).data;
-    console.log(userProfile);
+    console.log('fetching userProfile success, ', userProfile);
     return userProfile;
 }
 

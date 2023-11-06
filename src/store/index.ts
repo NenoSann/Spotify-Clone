@@ -18,7 +18,7 @@ const useUserStore = defineStore('user', {
 });
 const accessToken = defineStore('accessToken', {
     state: () => ({
-        accessToken: JSON.parse(localStorage.getItem('accessToken') as string) as accessTokenBody || null,
+        accessToken: localStorage.getItem('accessToken') === 'null' ? null : JSON.parse(localStorage.getItem('accessToken') as string),
         PCKE_Code: '',
     }),
     getters: {
@@ -29,7 +29,6 @@ const accessToken = defineStore('accessToken', {
             if (this.accessToken !== null) {
                 if (Date.now() - new Date(this.accessToken.created_at).getTime() > this.accessToken.expires_in * 1000) {
                     // token has expired
-                    console.log(Date.now() - new Date(this.accessToken.created_at).getTime(), this.accessToken.expires_in * 1000)
                     const componentStateStore = componentState();
                     componentStateStore.redirect = true;
                     await this.requestPCKE_token();
@@ -37,19 +36,24 @@ const accessToken = defineStore('accessToken', {
                 }
             } else {
                 // currently don't have token
+                const componentStore = componentState();
+                componentStore.redirect = true;
                 await this.requestPCKE_token();
-                localStorage.setItem('accessToken', JSON.stringify(this.accessToken));
+                componentStore.redirect = false;
             }
+            console.log('token ok, ', this.accessToken)
         },
         async redirectToSpotify() {
             redirectToSpotify();
         },
         async retriveCode() {
             this.PCKE_Code = retriveParams();
+            console.log('retrive code:', this.PCKE_Code)
         },
         async requestPCKE_token() {
             if (this.PCKE_Code !== '') {
                 const res = await getAccessToken_PKCE(this.PCKE_Code);
+                console.log('PCKE token: ', res)
                 window.localStorage.setItem('accessToken', JSON.stringify(res));
                 this.accessToken = res;
             }

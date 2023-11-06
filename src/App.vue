@@ -13,5 +13,6 @@ import SideBar from '@/views/SideBar.vue';
 <style scoped>
 #main {
   @apply flex;
+  @apply w-[100vw];
 }
 </style>

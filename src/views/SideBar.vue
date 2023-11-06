@@ -16,6 +16,6 @@ import SideBarItem from './SideBarItem.vue';
 .sidebar {
     height: 100vh;
     background-color: black;
-    width: fit-content;
+    @apply flex-grow-0 flex-shrink-0 basis-40;
 }
 </style>

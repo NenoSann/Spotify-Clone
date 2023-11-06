@@ -30,7 +30,9 @@ const axiosInstance = axios.create({
 });
 axiosInstance.interceptors.request.use((config) => {
     const tokenStore = accessToken();
-    config.headers['Authorization'] = `Bearer ${tokenStore.accessToken.access_token}`;
+    if (tokenStore.accessToken !== null) {
+        config.headers['Authorization'] = `Bearer ${tokenStore.accessToken.access_token}`;
+    };
     return config;
 }, (err) => Promise.reject(err));
 
