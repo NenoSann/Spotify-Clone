@@ -1,19 +1,19 @@
 import { createPinia, defineStore } from "pinia";
 import { getAccessToken, getAccessToken_PKCE, retriveParams, type accessTokenBody, redirectToSpotify } from "@/api/user/getAccessToken";
-import { useRouter } from "vue-router";
-const router = useRouter();
+import { getUserProfile } from "@/api/user/getUserProfile";
+import type { userProfile } from "@/lib/interface";
 const pinia = createPinia();
 const useUserStore = defineStore('user', {
-    state: () => {
-        return {
-            userID: 'NenoSann',
+    state: () => ({
+        // some weird type chagne
+        userProfile: JSON.parse(localStorage.getItem('userProfile') as string) as userProfile || null
+    }),
+    actions: {
+        async fetchUserProfile() {
+            const userProfile = await getUserProfile();
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            this.userProfile = userProfile;
         }
-    },
-    getters: {
-        getUserID: (state) => state.userID,
-    },
-    actions: () => {
-
     }
 });
 const accessToken = defineStore('accessToken', {

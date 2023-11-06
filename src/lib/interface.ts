@@ -5,7 +5,7 @@ interface UserInfo {
     imageURL: Ref<string>,
 }
 
-interface userImage {
+interface image {
     url: string,
     height: number,
     width: number
@@ -28,10 +28,49 @@ interface userProfile {
     },
     href: string,
     id: string,
-    images: userImage[],
+    images: image[],
     product: 'premium' | 'free' | 'open',
     type: 'user',
     uri: string,
 }
+interface artist {
+    external_urls: object,
+    followers: object,
+    genres: string[],
+    href: string,
+    id: string,
+    images: image[],
+    name: string,
+    popularity: number,
+    type: string,
+    uri: string
+}
 
-export type { UserInfo, userImage, userProfile }
+interface album {
+    album_type: string,
+    total_tracks: number,
+    avaliable_markets: string[],
+    external_urls: string,
+    href: string,
+    id: string,
+    images: image[],
+    name: string,
+    release_date: string,
+    release_date_precision: string,
+    restrictions: object,
+    type: string,
+    uri: string,
+    artists: artist[],
+}
+
+interface topItem {
+    href: string,
+    limit: number,
+    next: string,
+    offset: number,
+    previous: string,
+    total: number,
+    items: []
+}
+
+export type { UserInfo, image, userProfile, topItem }
