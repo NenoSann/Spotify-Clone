@@ -25,6 +25,6 @@ const props = defineProps<{
     @apply w-52 h-72 p-4;
     @apply rounded-lg;
     @apply flex-shrink-0;
-    background-color: rgba(0, 0, 0, 0.4);
+    @apply bg-black bg-opacity-30 hover:bg-opacity-40;
 }
 </style>

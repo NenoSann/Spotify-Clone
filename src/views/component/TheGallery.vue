@@ -5,13 +5,26 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+const props = defineProps<({
+    orientation: 'horizontal' | 'vertical'
+})>();
+const orientation = computed(() => {
+    if (props.orientation === 'horizontal') {
+        return 'row';
+    } else if (props.orientation === 'vertical') {
+        return 'column';
+    }
+})
 </script>
 
 <style scoped>
 .gallery-main {
-    @apply flex flex-row gap-6;
+    @apply flex gap-6;
     @apply max-w-full w-full;
     @apply overflow-auto;
+    flex-direction: v-bind(orientation);
 }
 
 .gallery-main::-webkit-scrollbar {

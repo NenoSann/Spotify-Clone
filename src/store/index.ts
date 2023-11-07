@@ -33,6 +33,7 @@ const accessToken = defineStore('accessToken', {
                     componentStateStore.redirect = true;
                     await this.requestPCKE_token();
                     console.log('Token expired,', this.accessToken)
+                    componentStateStore.redirect = false;
                 }
             } else {
                 // currently don't have token

@@ -14,8 +14,8 @@ import SideBarItem from './SideBarItem.vue';
     
 <style scoped>
 .sidebar {
-    height: 100vh;
     background-color: black;
-    @apply flex-grow-0 flex-shrink-0 basis-40;
+    @apply flex-grow-0 flex-shrink-0 basis-72;
+    @apply mx-2 mt-2 rounded-md overflow-hidden;
 }
 </style>

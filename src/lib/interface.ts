@@ -48,7 +48,7 @@ interface artist {
 
 interface track {
     album: album,
-    artist: artist[],
+    artists: artist[],
     avaliable_market: string[],
     disc_number: number,
     duration_ms: number,

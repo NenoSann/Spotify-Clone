@@ -13,7 +13,7 @@ import SideBar from '@/views/SideBar.vue';
 <style scoped>
 #main {
   @apply flex;
-  @apply w-[100vw];
-  @apply overflow-x-hidden;
+  @apply w-[100vw] max-h-screen;
+  @apply overflow-x-hidden overflow-y-hidden;
 }
 </style>

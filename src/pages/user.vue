@@ -17,7 +17,7 @@
         <div class="hot-artist">
             <p class="font-semibold text-2xl">本月热门艺人</p>
             <p class="font-light text-sm my-1">仅自己可见</p>
-            <TheGallery>
+            <TheGallery orientation="horizontal">
                 <TheCard v-bind="card" v-for="card of artistCards">
                 </TheCard>
             </TheGallery>
@@ -25,8 +25,10 @@
         <div class="hot-track">
             <p class="font-semibold text-2xl">本月热门单曲</p>
             <p class="font-thin text-sm my-1">仅自己可见</p>
-            <TheGallery>
-                <TheCard v-bind="card" v-for="card of trackCards"></TheCard>
+            <TheGallery orientation="vertical" style="gap: 0;">
+                <!-- Why are you yelling at me? -->
+                <TheTrackSection v-bind="card" :order="n + 1" :tabindex="n" v-for="(card, n) of trackCards">
+                </TheTrackSection>
             </TheGallery>
         </div>
         <div class="open-list">
@@ -46,6 +48,7 @@ import type { artist, track } from '@/lib/interface';
 import { getUserTopItem } from '@/api/user/getUserTopItem';
 import TheGallery from '@/views/component/TheGallery.vue';
 import TheCard from '@/views/component/TheCard.vue';
+import TheTrackSection from '@/views/component/TheTrackSection.vue';
 const userStore = useUserStore();
 const userProfile = computed(() => {
     return userStore.userProfile;
@@ -65,9 +68,12 @@ const artistCards = computed(() => {
 const trackCards = computed(() => {
     return topTracks.value?.map((track) => {
         return {
+            track_name: track.name,
+            album_name: track.album.name,
+            track_duration: `${Math.floor(track.duration_ms / 1000 / 60)}:${Math.floor((track.duration_ms / 1000) % 60) > 9 ? Math.floor((track.duration_ms / 1000) % 60) : '0' + Math.floor((track.duration_ms / 1000) % 60)}`,
             image_url: track.album.images[0].url,
+            artist_name: track.artists[0].name,
             card_type: 'Track',
-            card_name: track.name
         }
     })
 })
