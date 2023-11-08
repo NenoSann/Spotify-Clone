@@ -84,6 +84,35 @@ interface album {
     artists: artist[],
 }
 
+interface playlist {
+    href: string,
+    limit: number,
+    next?: string,
+    offset: number,
+    previous?: string,
+    total: number,
+    items: {
+        collaborative: boolean,
+        description: string,
+        external_urls: {
+            'spotify': string
+        },
+        href: string, // a link to Web Api endpoint providing full details of the playlist
+        id: string,
+        images: image[],
+        name: string,
+        owner: object,
+        public: boolean,
+        snapshot_id: string,
+        tracks: {
+            href: string,
+            total: number
+        },
+        type: 'playlist',
+        uri: string
+    }[]
+}
+
 interface topItem {
     href: string,
     limit: number,
@@ -94,4 +123,4 @@ interface topItem {
     items: artist[] | track[]
 }
 
-export type { UserInfo, image, userProfile, topItem, artist, track, album }
+export type { UserInfo, image, userProfile, topItem, artist, track, album, playlist }

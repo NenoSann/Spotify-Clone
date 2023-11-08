@@ -1,18 +1,21 @@
 <template>
-    <div class="card-main">
-        <div class="daisy-avatar">
-            <img :src="image_url" class="rounded-full">
+    <div class="card-main group">
+        <div class="daisy-avatar aspect-square">
+            <img :src="image_url" :class="props.avatar_type === 'round' ? 'rounded-full' : 'rounded-md'">
         </div>
-        <p class=" font-semibold">{{ card_name }}</p>
+        <font-awesome-icon class="play-button group-hover:opacity-100" icon="fa-solid fa-circle-play fa-2xl" />
+        <p class=" line-clamp-1 font-semibold">{{ card_name }}</p>
         <p class=" font-light">{{ card_type }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 const props = defineProps<{
     image_url: string,
     card_type: string,
-    card_name: string
+    card_name: string,
+    avatar_type: 'round' | 'square'
 }>();
 </script>
 
@@ -22,9 +25,22 @@ const props = defineProps<{
 }
 
 .card-main {
-    @apply w-52 h-72 p-4;
+    @apply relative w-52 h-72 p-4;
     @apply rounded-lg;
     @apply flex-shrink-0;
     @apply bg-black bg-opacity-30 hover:bg-opacity-40;
+    @apply transition-all duration-300;
+}
+
+.play-button {
+    opacity: 0;
+    font-size: 52px;
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    color: #1db954;
+    background: transparent;
+    @apply transition-all duration-300;
+    @apply group-hover:-translate-y-2;
 }
 </style>

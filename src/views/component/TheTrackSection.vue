@@ -9,7 +9,7 @@
             </div>
             <div>
                 <p class="track-name">{{ track_name }}</p>
-                <p class="font-light text-sm">{{ artist_name }}</p>
+                <p class="line-clamp-1 font-light text-sm">{{ artist_name }}</p>
             </div>
         </div>
         <div class="flex justify-start items-center text-left basis-2/6">

@@ -18,7 +18,7 @@
             <p class="font-semibold text-2xl">本月热门艺人</p>
             <p class="font-light text-sm my-1">仅自己可见</p>
             <TheGallery orientation="horizontal">
-                <TheCard v-bind="card" v-for="card of artistCards">
+                <TheCard v-bind="card" avatar_type="round" v-for="card of artistCards">
                 </TheCard>
             </TheGallery>
         </div>
@@ -32,20 +32,29 @@
             </TheGallery>
         </div>
         <div class="open-list">
-
+            <p class="font-semibold text-2xl mb-4">公开歌单</p>
+            <TheGallery orientation="horizontal">
+                <TheCard v-bind="list" avatar_type="square" v-for="list of playlistCards">
+                </TheCard>
+            </TheGallery>
         </div>
         <div class="following">
-
+            <p class="font-semibold text-2xl mb-4">关注中</p>
+            <TheGallery orientation="horizontal">
+                <TheCard v-bind="item" avatar_type="round" v-for="item of followedCards"></TheCard>
+            </TheGallery>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import type { Ref } from 'vue';
 import { useUserStore } from '@/store';
-import type { artist, track } from '@/lib/interface';
+import type { Ref } from 'vue';
+import type { artist, track, playlist } from '@/lib/interface';
 import { getUserTopItem } from '@/api/user/getUserTopItem';
+import { getCurrentPlaylist } from '@/api/playlist/getCurrentPlaylist';
+import { getFollowedArtists } from '@/api/user/getFollowedArtists';
 import TheGallery from '@/views/component/TheGallery.vue';
 import TheCard from '@/views/component/TheCard.vue';
 import TheTrackSection from '@/views/component/TheTrackSection.vue';
@@ -55,9 +64,10 @@ const userProfile = computed(() => {
 })
 const topArtists: Ref<artist[] | undefined> = ref();
 const topTracks: Ref<track[] | undefined> = ref();
+const playlist: Ref<playlist["items"] | undefined> = ref();
+const follow: Ref<artist[] | undefined> = ref();
 const artistCards = computed(() => {
     return topArtists.value?.map((artist) => {
-        console.log('artists image', artist.images[0].url)
         return {
             image_url: artist.images[0].url,
             card_type: 'Artist',
@@ -77,17 +87,30 @@ const trackCards = computed(() => {
         }
     })
 })
-
-const cardProps = {
-    imageURL: 'src/assets/image/jacket_s_090.png',
-    card_type: 'track',
-    card_name: 'Infinate Gray'
-}
+const playlistCards = computed(() => {
+    return playlist.value?.map((list) => {
+        return {
+            image_url: list.images.length !== 0 ? list.images[0].url : null,
+            card_type: 'List',
+            card_name: list.name
+        }
+    })
+})
+const followedCards = computed(() => {
+    return follow.value?.map((item) => {
+        return {
+            image_url: item.images[0].url,
+            card_type: 'Profile',
+            card_name: item.name
+        }
+    })
+})
 onMounted(async () => {
     topArtists.value = (await getUserTopItem('artists')).items as artist[];
     topTracks.value = (await getUserTopItem('tracks')).items as track[];
+    playlist.value = (await getCurrentPlaylist(5)).items as playlist['items'];
+    follow.value = (await getFollowedArtists()).artists.items as artist[];
 })
-// const item = await getUserTopItem('artsts'); 
 </script>
 
 <style scoped>

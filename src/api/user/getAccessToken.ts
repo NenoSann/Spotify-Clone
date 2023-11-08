@@ -69,7 +69,7 @@ const redirectToSpotify = async function () {
     const hashed = await sha256(codeVerifier)
     const codeChallenge = base64encode(hashed);
     const redirectUri = 'http://localhost:5173';
-    const scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
+    const scope = 'user-read-private user-read-email user-top-read user-read-recently-played playlist-read-private playlist-read-collaborative user-follow-read user-follow-modify';
     const authUrl = new URL('https://accounts.spotify.com/authorize');
     console.log('code_verifier set,', codeVerifier);
     window.localStorage.setItem('code_verifier', codeVerifier);

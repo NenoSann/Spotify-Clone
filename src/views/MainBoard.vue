@@ -29,5 +29,6 @@ const userinfo: userProfile = userStore.userProfile;
     width: 100%;
     background: rgb(0, 115, 255);
     background: linear-gradient(180deg, rgba(0, 115, 255, 1) 0%, rgba(2, 0, 36, 1) 100%);
+    @apply min-h-[100%];
 }
 </style>
