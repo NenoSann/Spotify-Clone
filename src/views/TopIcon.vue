@@ -8,13 +8,15 @@
         <div class="right-icon-div">
             <font-awesome-icon class="icon" icon="fa-solid fa-chevron-right" />
         </div>
-        <UserIcon :userinfo="props.userinfo"></UserIcon>
+        <UserIcon @click="router.push('/user')" :userinfo="props.userinfo"></UserIcon>
     </div>
 </template>
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { useRouter } from 'vue-router';
 import UserIcon from './UserIcon.vue';
+const router = useRouter();
 const props = defineProps(['userinfo'])
 
 </script>

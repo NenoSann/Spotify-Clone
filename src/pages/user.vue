@@ -84,6 +84,7 @@ const trackCards = computed(() => {
             image_url: track.album.images[0].url,
             artist_name: track.artists[0].name,
             card_type: 'Track',
+            spotify_uri: track.uri
         }
     })
 })

@@ -10,7 +10,9 @@ import SpotifyiFramse from './views/component/SpotifyiFramse.vue';
       <side-bar></side-bar>
       <home-page></home-page>
     </div>
-    <spotifyi-framse></spotifyi-framse>
+    <keep-alive>
+      <spotifyi-framse></spotifyi-framse>
+    </keep-alive>
   </div>
 </template>
 
@@ -21,7 +23,9 @@ import SpotifyiFramse from './views/component/SpotifyiFramse.vue';
   @apply overflow-x-hidden overflow-y-hidden;
 }
 
+/* the spotify iFrame is 152px, with 1rem margin */
 .content {
-  @apply flex flex-row
+  @apply h-[calc(100vh-152px-1rem)];
+  @apply flex flex-row;
 }
 </style>

@@ -21,7 +21,7 @@ onMounted(async () => {
 <style scoped>
 .main {
     @apply flex-grow flex-shrink basis-auto;
-    @apply min-w-0 max-h-screen rounded-md mt-2 mr-2;
+    @apply min-w-0 max-h-screen rounded-2xl mt-2 mr-2;
     @apply relative;
     @apply overflow-x-hidden;
 }

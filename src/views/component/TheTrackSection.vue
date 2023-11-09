@@ -46,7 +46,8 @@ const props = defineProps<{
     artist_name: string,
     album_name: string,
     track_duration: string,
-    order: number
+    order: number,
+    spotify_uri: string
 }>();
 
 </script>
