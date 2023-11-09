@@ -6,12 +6,11 @@
         </div>
         <div class="play-list rounded-2xl overflow-hidden p-2 w-[30%] bg-teal-700">
             <div
-                class="daisy-menu daisy-menu-vertical flex-nowrap overflow-auto min-h-full w-full h-full rounded-2xl max-h-full">
-                <li id="list-item" tabindex=0>spotify:track:0HYAsQwJIO6FLqpyTeD3l6</li>
-                <li id="list-item" tabindex=0>spotify:track:3OdkC5pG8vc26S26qHyBo8</li>
-                <li id="list-item" tabindex=0>spotify:track:2S1wK8ocFeOUx4aBw6z2q8</li>
-                <li id="list-item" tabindex=0>spotify:track:3OdkC5pG8vc26S26qHyBo8</li>
-                <li id="list-item" tabindex=0>spotify:track:5WsENYuqLbWUc6ArmXhzi0</li>
+                class="daisy-menu daisy-menu-vertical flex-nowrap overflow-x-hidden min-h-full w-full h-full rounded-2xl max-h-full">
+                <transition-group name="list">
+                    <li :data-uri="item.uri" id="list-item" v-for="item in playlistItems" :key="item.uri">{{ item.track_name
+                    }}</li>
+                </transition-group>
             </div>
         </div>
         <div class="control-button rounded-2xl w-[10%] bg-orange-600">
@@ -22,6 +21,8 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
+import { playerState } from '@/store';
+const playerStore = playerState();
 const player = ref<HTMLElement | null>(null);
 const player_wrap = ref<HTMLElement | null>(null);
 const player_height = computed(() => {
@@ -31,13 +32,20 @@ const player_width = computed(() => {
     return player_wrap.value?.offsetWidth;
 })
 const playerCallback = function (EmbedController: any) {
-    document.querySelectorAll('#list-item').forEach((item) => {
-        item.addEventListener('click', () => {
-            console.log(item.innerHTML);
-            EmbedController.loadUri(item.innerHTML);
-        })
+    // put eventListener on parent div rather than li to increase performance
+    // and logic. 
+    const playlistNode = document.querySelector('.play-list') as HTMLElement;
+    playlistNode.addEventListener('click', (event) => {
+        const clickedElement: HTMLElement = event.target as HTMLElement;
+        if (clickedElement.id === 'list-item') {
+            EmbedController.loadUri(clickedElement.dataset['uri']);
+            EmbedController.play();
+        }
     })
 }
+const playlistItems = computed(() => {
+    return playerStore.playlist;
+})
 onMounted(() => {
     (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
         console.log('spotify ready!');
@@ -74,5 +82,24 @@ defineExpose({ playerCallback });
     @apply hover:bg-white;
     @apply rounded-xl;
     @apply text-center;
+}
+
+.list-move,
+/* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+    position: absolute;
 }
 </style>

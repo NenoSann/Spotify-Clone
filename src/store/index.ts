@@ -2,7 +2,13 @@ import { createPinia, defineStore } from "pinia";
 import { getAccessToken, getAccessToken_PKCE, retriveParams, type accessTokenBody, redirectToSpotify } from "@/api/user/getAccessToken";
 import { getUserProfile } from "@/api/user/getUserProfile";
 import type { userProfile } from "@/lib/interface";
+import { stringifyQuery } from "vue-router";
 const pinia = createPinia();
+interface ListItem {
+    uri: string,
+    track_name: string,
+    artist_name: string
+}
 const useUserStore = defineStore('user', {
     state: () => ({
         // some weird type chagne
@@ -65,5 +71,10 @@ const componentState = defineStore('componentState', {
     state: () => ({
         redirect: false,
     }),
+});
+const playerState = defineStore('playerState', {
+    state: (): { playlist: ListItem[] } => ({
+        playlist: []
+    })
 })
-export { pinia, useUserStore, accessToken, componentState };
+export { pinia, useUserStore, accessToken, componentState, playerState };

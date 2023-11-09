@@ -1,5 +1,5 @@
 <template>
-    <div class="track-section group">
+    <div class="track-section group" @click="addToPlaylist">
         <div class="flex left-item basis-3/6">
             <div class="w-10 h-10 flex justify-center items-center">
                 <p>{{ order }}</p>
@@ -40,6 +40,8 @@
 </template>
 
 <script setup lang="ts">
+import { playerState } from '@/store';
+const playerStore = playerState();
 const props = defineProps<{
     image_url: string,
     track_name: string,
@@ -49,7 +51,14 @@ const props = defineProps<{
     order: number,
     spotify_uri: string
 }>();
-
+const addToPlaylist = () => {
+    playerStore.playlist.unshift({
+        uri: props.spotify_uri,
+        track_name: props.track_name,
+        artist_name: props.artist_name
+    })
+    console.log(playerStore.playlist);
+}
 </script>
 
 <style scoped>
