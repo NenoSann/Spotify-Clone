@@ -1,6 +1,10 @@
 <template>
     <div class="main">
-        <router-view></router-view>
+        <router-view v-slot="{ Component, route }">
+            <KeepAlive :max="3">
+                <component :is="Component" :key="route.path"></component>
+            </KeepAlive>
+        </router-view>
         <TheAlert></TheAlert>
     </div>
 </template>
@@ -9,8 +13,12 @@
 import TheAlert from '@/views/component/TheAlert.vue'
 import { onMounted } from 'vue';
 import { accessToken, useUserStore } from '../store/index'
+import type { Router } from 'vue-router';
 const tokenStore = accessToken();
 const userStore = useUserStore();
+const getKeepAliveInclude = function (route) {
+    return route.meta.key;
+}
 onMounted(async () => {
     await tokenStore.retriveCode();
     await tokenStore.fetchAccessToken();

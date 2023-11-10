@@ -26,7 +26,6 @@
             <p class="font-semibold text-2xl">本月热门单曲</p>
             <p class="font-thin text-sm my-1">仅自己可见</p>
             <TheGallery orientation="vertical" style="gap: 0;">
-                <!-- Why are you yelling at me? -->
                 <TheTrackSection v-bind="card" :order="n + 1" :tabindex="n" v-for="(card, n) of trackCards">
                 </TheTrackSection>
             </TheGallery>
@@ -72,6 +71,7 @@ const artistCards = computed(() => {
             image_url: artist.images[0].url,
             card_type: 'Artist',
             card_name: artist.name,
+            route_url: `/artist/${artist.id}`
         }
     })
 });
