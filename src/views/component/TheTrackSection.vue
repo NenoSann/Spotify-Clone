@@ -1,19 +1,19 @@
 <template>
     <div class="track-section group" @click="addToPlaylist">
         <div class="flex left-item basis-3/6">
-            <div class="w-10 h-10 flex justify-center items-center">
+            <div class="w-10 h-10 flex justify-center items-center shrink-0">
                 <p>{{ order }}</p>
             </div>
-            <div class="daisy-avatar w-10 h-10 mr-4">
+            <div class="daisy-avatar w-10 h-10 mr-4 shrink-0">
                 <img :src="image_url">
             </div>
-            <div>
-                <p class="track-name">{{ track_name }}</p>
-                <p class="line-clamp-1 font-light text-sm">{{ artist_name }}</p>
+            <div class="flex flex-col items-start justify-center">
+                <p class="track-name line-clamp-1">{{ track_name }}</p>
+                <p class="line-clamp-1 font-light text-sm" v-if="artist_name">{{ artist_name }}</p>
             </div>
         </div>
         <div class="flex justify-start items-center text-left basis-2/6">
-            <p class="line-clamp-1  text-sm">{{ album_name }}</p>
+            <p class="line-clamp-1  text-sm" v-if="album_name">{{ album_name }}</p>
         </div>
         <div class="flex basis-1/6">
             <div class="track-duration flex justify-center items-center ">
@@ -45,8 +45,8 @@ const playerStore = playerState();
 const props = defineProps<{
     image_url: string,
     track_name: string,
-    artist_name: string,
-    album_name: string,
+    artist_name: string | null
+    album_name: string | null,
     track_duration: string,
     order: number,
     spotify_uri: string

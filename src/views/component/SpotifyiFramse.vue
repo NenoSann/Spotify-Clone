@@ -8,8 +8,10 @@
             <div
                 class="daisy-menu daisy-menu-vertical flex-nowrap overflow-x-hidden min-h-full w-full h-full rounded-2xl max-h-full">
                 <transition-group name="list">
-                    <li :data-uri="item.uri" id="list-item" v-for="item in playlistItems" :key="item.uri">{{ item.track_name
-                    }}</li>
+                    <li class=" text-left" :data-uri="item.uri" id="list-item" v-for="item in playlistItems"
+                        :key="item.uri">{{
+                            item.track_name
+                        }}</li>
                 </transition-group>
             </div>
         </div>
@@ -56,7 +58,7 @@ onMounted(() => {
             uri: "spotify:track:60nwK1iMgnFCznF6FiNfts",
             height: 152,
             width: player_width.value as number * 3 / 5 - 8,
-            frameBorder: 0
+            frameBorder: 0,
         };
         const callback = playerCallback;
         IFrameAPI.createController(element, options, callback)

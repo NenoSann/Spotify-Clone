@@ -8,7 +8,7 @@
         <div class="right-icon-div">
             <font-awesome-icon class="icon" icon="fa-solid fa-chevron-right" />
         </div>
-        <UserIcon @click="router.push('/user')" :userinfo="props.userinfo"></UserIcon>
+        <UserIcon @click="router.push(`/user/${userinfo.id}`)" :userinfo="props.userinfo"></UserIcon>
     </div>
 </template>
 
