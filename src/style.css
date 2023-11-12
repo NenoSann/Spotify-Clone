@@ -5,3 +5,7 @@
 #app {
   @apply overflow-x-hidden;
 }
+
+:root {
+  --primary-color: #66ccff;
+}

@@ -1,9 +1,11 @@
 <template>
     <div class="main">
         <router-view v-slot="{ Component, route }">
-            <KeepAlive :max="3">
-                <component :is="Component" :key="route.path"></component>
-            </KeepAlive>
+            <Transition name="fade" mode="out-in">
+                <KeepAlive :max="3">
+                    <component :is="Component" :key="route.path"></component>
+                </KeepAlive>
+            </Transition>
         </router-view>
         <TheAlert></TheAlert>
     </div>
@@ -32,5 +34,15 @@ onMounted(async () => {
     @apply min-w-0 max-h-screen rounded-2xl mt-2 mr-2;
     @apply relative;
     @apply overflow-x-hidden;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s ease;
 }
 </style>

@@ -55,15 +55,14 @@ const addToPlaylist = () => {
     playerStore.playlist.unshift({
         uri: props.spotify_uri,
         track_name: props.track_name,
-        artist_name: props.artist_name
+        artist_name: props.artist_name as string,
     })
-    console.log(playerStore.playlist);
 }
 </script>
 
 <style scoped>
 .track-section {
-    @apply w-full h-14 p-2;
+    @apply w-full max-w-screen-xl h-14 p-2;
     @apply flex flex-row;
     @apply bg-transparent;
     @apply rounded-md overflow-hidden;

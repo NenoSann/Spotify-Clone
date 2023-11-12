@@ -6,16 +6,19 @@
                 <p class="text-white mt-[8vh]">{{ artist?.followers.total }} followers</p>
             </div>
             <div class="daisy-avatar w-[40vh] h-[40vh] absolute left-1/2 -translate-x-1/2">
-                <img ref="avatarRef" class="  shadow-lg" :src="artist?.images[0].url" :alt="artist?.name + '\'s avatar'"
-                    async lazy>
+                <img ref="avatarRef" class="rounded-full  shadow-lg" :src="artist?.images[0].url"
+                    :alt="artist?.name + '\'s avatar'" async lazy>
             </div>
         </div>
-        <div class="popular p-2">
-            <div class="button-set"></div>
-            <TheGallery orientation="vertical" style="gap:0">
-                <TheTrackSection v-bind="track" :order="n + 1" v-for="(track, n) in artist_toptracks">
-                </TheTrackSection>
-            </TheGallery>
+        <div class="popular-wrap p-2">
+            <div class="popular z-10">
+                <div class="button-set"></div>
+                <p class="font-semibold text-2xl text-white mb-4">热门</p>
+                <TheGallery orientation="vertical" style="gap:0">
+                    <TheTrackSection v-bind="track" :order="n + 1" v-for="(track, n) in artist_toptracks">
+                    </TheTrackSection>
+                </TheGallery>
+            </div>
         </div>
     </div>
 </template>
@@ -26,14 +29,14 @@ import TheGallery from './component/TheGallery.vue';
 import TheTrackSection from './component/TheTrackSection.vue';
 import type { artist, track } from '@/lib/interface';
 import { getArtist, getArtistTopTracks } from '@/api/artist/getArtist';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+
 const route = useRoute();
 const artist = ref<artist>();
 const artist_toptracks = ref<[]>();
 const avatarRef = ref<HTMLImageElement>();
 const artist_primary_color = ref('#000000');
-
 const getPrimaryColor = function () {
     const colorThief = new ColorThief();
     const image = avatarRef.value;
@@ -51,7 +54,6 @@ const getPrimaryColor = function () {
                 return hex.length === 1 ? '0' + hex : hex;
             }).join('')
         })
-
     }
 }
 onMounted(async () => {
@@ -75,6 +77,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+:root {
+    --primary-color: v-bind(artist_primary_color);
+}
+
 .artist-main {
     @apply flex flex-col;
     @apply min-h-full;
@@ -85,8 +91,21 @@ onMounted(async () => {
     @apply p-6;
     @apply h-[46vh];
     /* background-image: url(https://i.scdn.co/image/ab6761860000101631877a5cf284748fff546384); */
-    @apply bg-current;
     @apply transition-all duration-500 ease-in-out;
     background-color: v-bind(artist_primary_color);
+}
+
+.popular-wrap {
+    /* background-color: v-bind(artist_primary_color); */
+    --primary-color: v-bind(artist_primary_color);
+    @apply relative;
+    @apply bg-gradient-to-b from-[var(--primary-color)] to-transparent;
+    @apply backdrop-blur-2xl;
+}
+
+.popular-wrap::before {
+    @apply absolute bg-black bg-opacity-50 z-[-1] top-0 left-0 w-full h-full;
+    content: '';
+    pointer-events: none;
 }
 </style>

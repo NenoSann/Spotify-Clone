@@ -24,7 +24,6 @@ const props = defineProps<{
 }>();
 const redirectToPage = () => {
     if (props.route_url) {
-        console.log(props.route_url)
         router.push(props.route_url);
     }
 }
