@@ -6,7 +6,7 @@
         </div>
         <div class="play-list rounded-2xl overflow-hidden p-2 w-[30%] bg-teal-700">
             <div
-                class="daisy-menu daisy-menu-vertical flex-nowrap overflow-x-hidden min-h-full w-full h-full rounded-2xl max-h-full">
+                class="list daisy-menu daisy-menu-vertical flex-nowrap overflow-x-hidden min-h-full w-full h-full rounded-2xl max-h-full">
                 <transition-group name="list">
                     <li class=" text-left" :data-uri="item.uri" id="list-item" v-for="item in playlistItems"
                         :key="item.uri">{{
@@ -79,11 +79,27 @@ defineExpose({ playerCallback });
     @apply select-none;
 }
 
-.play-list li {
+.list li {
     @apply p-1;
     @apply hover:bg-white;
     @apply rounded-xl;
     @apply text-center;
+}
+
+.list::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+    height: 50px;
+    border: 4px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+    background-color: #fff4;
+}
+
+.list::-webkit-scrollbar-corner {
+    display: none;
 }
 
 .list-move,

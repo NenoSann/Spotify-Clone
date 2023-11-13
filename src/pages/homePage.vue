@@ -18,7 +18,7 @@ import { accessToken, useUserStore } from '../store/index'
 import type { Router } from 'vue-router';
 const tokenStore = accessToken();
 const userStore = useUserStore();
-const getKeepAliveInclude = function (route) {
+const getKeepAliveInclude = function (route: any) {
     return route.meta.key;
 }
 onMounted(async () => {
@@ -31,9 +31,25 @@ onMounted(async () => {
 <style scoped>
 .main {
     @apply flex-grow flex-shrink basis-auto;
-    @apply min-w-0 max-h-screen rounded-2xl mt-2 mr-2;
+    @apply min-w-0 max-h-screen rounded-2xl mt-2;
     @apply relative;
     @apply overflow-x-hidden;
+}
+
+.main::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+    height: 50px;
+    border: 4px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+    background-color: #fff4;
+}
+
+.main::-webkit-scrollbar-corner {
+    display: none;
 }
 
 .fade-enter-from,

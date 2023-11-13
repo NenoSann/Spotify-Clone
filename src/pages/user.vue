@@ -10,7 +10,7 @@
                 <p>个人资料</p>
                 <h1 class=" text-8xl font-bold">{{ userProfile.display_name }}</h1>
                 <div>
-                    <span>{{ 9 }}个公开歌单</span><span> | </span><span>关注{{ 8 }}人</span>
+                    <span>{{ 9 }}个公开歌单</span><span> | </span><span>关注{{ follow?.length }}人</span>
                 </div>
             </div>
         </div>
@@ -65,6 +65,7 @@ const topArtists: Ref<artist[] | undefined> = ref();
 const topTracks: Ref<track[] | undefined> = ref();
 const playlist: Ref<playlist["items"] | undefined> = ref();
 const follow: Ref<artist[] | undefined> = ref();
+const followTotal: Ref<number> = ref(0);
 const artistCards = computed(() => {
     return topArtists.value?.map((artist) => {
         return {
@@ -109,8 +110,10 @@ const followedCards = computed(() => {
 onMounted(async () => {
     topArtists.value = (await getUserTopItem('artists')).items as artist[];
     topTracks.value = (await getUserTopItem('tracks')).items as track[];
-    playlist.value = (await getCurrentPlaylist(5)).items as playlist['items'];
-    follow.value = (await getFollowedArtists()).artists.items as artist[];
+    playlist.value = (await getCurrentPlaylist(8)).items as playlist['items'];
+    const followedArtists = (await getFollowedArtists()).artists;
+    follow.value = followedArtists.items;
+    followTotal.value = followedArtists.total;
 })
 </script>
 

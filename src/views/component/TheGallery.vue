@@ -8,7 +8,7 @@
 import { computed } from 'vue';
 
 const props = defineProps<({
-    orientation: 'horizontal' | 'vertical'
+    orientation: 'horizontal' | 'vertical' | undefined
 })>();
 const orientation = computed(() => {
     if (props.orientation === 'horizontal') {

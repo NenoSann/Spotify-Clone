@@ -2,11 +2,11 @@
     <div class="card-main group" @click="redirectToPage">
         <div class="daisy-avatar aspect-square">
             <img :src="image_url" :class="props.avatar_type === 'round' ? 'rounded-full' : 'rounded-md'" width="176"
-                height="176">
+                height="176" loading="lazy">
         </div>
         <font-awesome-icon class="play-button group-hover:opacity-100" icon="fa-solid fa-circle-play fa-2xl" />
-        <p class=" line-clamp-1 font-semibold">{{ card_name }}</p>
-        <p class=" font-light">{{ card_type }}</p>
+        <p class=" line-clamp-1 font-semibold text-white">{{ card_name }}</p>
+        <p class=" font-normal">{{ card_type }}</p>
     </div>
 </template>
 
@@ -38,7 +38,7 @@ const redirectToPage = () => {
     @apply relative w-52 h-72 p-4;
     @apply rounded-lg;
     @apply flex-shrink-0;
-    @apply bg-black bg-opacity-30 hover:bg-opacity-40;
+    @apply bg-gray-700 bg-opacity-40 hover:bg-opacity-70;
     @apply transition-all duration-300;
 }
 
