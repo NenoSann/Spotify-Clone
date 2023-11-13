@@ -2,7 +2,7 @@
     <div class="main">
         <router-view v-slot="{ Component, route }">
             <Transition name="fade" mode="out-in">
-                <KeepAlive :max="3">
+                <KeepAlive :max="5">
                     <component :is="Component" :key="route.path"></component>
                 </KeepAlive>
             </Transition>
@@ -15,7 +15,6 @@
 import TheAlert from '@/views/component/TheAlert.vue'
 import { onMounted } from 'vue';
 import { accessToken, useUserStore } from '../store/index'
-import type { Router } from 'vue-router';
 const tokenStore = accessToken();
 const userStore = useUserStore();
 const getKeepAliveInclude = function (route: any) {

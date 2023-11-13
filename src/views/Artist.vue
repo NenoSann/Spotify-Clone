@@ -26,7 +26,7 @@
             <p class="font-semibold text-2xl text-white mb-4">唱片目录</p>
             <TheGallery orientation="horizontal">
                 <TheCard :image_url="item.images[0].url" :card_type="item.album_type" :card_name="item.name"
-                    avatar_type="square" v-for="(item) in artist_album">
+                    avatar_type="square" :route_url="`/album/${item.id}`" v-for="(item) in artist_album">
                 </TheCard>
             </TheGallery>
         </div>
@@ -147,10 +147,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-:root {
-    --primary-color: v-bind(artist_primary_color);
-}
-
 .artist-main {
     @apply flex flex-col;
     @apply min-h-full;
