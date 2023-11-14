@@ -10,7 +10,7 @@ import SongIconSm from './SongIconSm.vue';
 
 let songInfos = [
     { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png" },
-    { songName: "Potato", songImage: "src/assets/image/jacket_s_022.png" },
+    { songName: "Potato", songImage: "https://misc.scdn.co/liked-songs/liked-songs-640.png" },
     { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png" },
     { songName: "Potato", songImage: "src/assets/image/jacket_s_061.png" },
     { songName: "幽灵东京", songImage: "src/assets/image/jacket_s_102.png" },

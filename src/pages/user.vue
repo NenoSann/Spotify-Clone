@@ -33,7 +33,7 @@
         <div class="open-list">
             <p class="font-semibold text-2xl mb-4">公开歌单</p>
             <TheGallery orientation="horizontal">
-                <TheCard v-bind="list" avatar_type="square" v-for="list of playlistCards">
+                <TheCard v-bind="list" avatar_type="square" v-for="list of playlistCards" :route_url="list.list_url">
                 </TheCard>
             </TheGallery>
         </div>
@@ -94,7 +94,8 @@ const playlistCards = computed(() => {
         return {
             image_url: list.images.length !== 0 ? list.images[0].url : null,
             card_type: 'List',
-            card_name: list.name
+            card_name: list.name,
+            list_url: '/playlist/' + list.id,
         }
     })
 })
