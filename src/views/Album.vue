@@ -2,9 +2,8 @@
     <div class="album">
         <div class="album-header h-80 bg-slate-50">
             <div class="daisy-avatar w-52 h-52 shadow-2xl mr-6">
-                <img async ref="album_image" :src="album?.images[0].url" :alt="album?.name"
-                    :height="album?.images[0].height" :width="album?.images[0].width" loading="lazy"
-                    @click="getPrimaryColor">
+                <img async ref="album_image" :src="album?.images[0].url" :alt="album?.name" :height="208" :width="208"
+                    loading="lazy" @click="getPrimaryColor">
             </div>
             <div class="flex flex-col justify-end text-white gap-6">
                 <p>{{ albumTypeMap[album?.album_type] }}</p>
