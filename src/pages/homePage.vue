@@ -17,9 +17,6 @@ import { onMounted } from 'vue';
 import { accessToken, useUserStore } from '../store/index'
 const tokenStore = accessToken();
 const userStore = useUserStore();
-const getKeepAliveInclude = function (route: any) {
-    return route.meta.key;
-}
 onMounted(async () => {
     await tokenStore.retriveCode();
     await tokenStore.fetchAccessToken();

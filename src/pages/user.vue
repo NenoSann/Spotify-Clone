@@ -121,7 +121,7 @@ onMounted(async () => {
 .user-main {
     @apply flex flex-col gap-8;
     @apply p-6;
-    @apply bg-gradient-to-b from-primary-focus to-accent;
+    @apply bg-gradient-to-b from-primary to-accent;
     @apply text-amber-50;
 }
 

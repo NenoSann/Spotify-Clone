@@ -1,5 +1,5 @@
-import { axiosInstance } from "../index";
 import type { album } from "@/lib/interface";
+import { axiosInstance } from "../index";
 const getAlbum = async function (id: string, market?: string): Promise<album> {
     market = market ? market : 'JP';
     return new Promise<album>((resolve, reject) => {
@@ -16,5 +16,21 @@ const getAlbum = async function (id: string, market?: string): Promise<album> {
         })
     })
 }
-
-export { getAlbum }
+const getAlbumTracks = async function (id: string, market?: string, limit?: number, offset?: number) {
+    market = market ? market : 'JP';
+    return new Promise((resove, reject) => {
+        axiosInstance.get(`/albums/${id}/tracks`, {
+            params: {
+                market,
+                limit,
+                offset
+            }
+        }).then((res) => {
+            resove(res.data);
+        }).catch((error) => {
+            console.log('fetch album tracks error');
+            reject(error);
+        })
+    })
+}
+export { getAlbum, getAlbumTracks }

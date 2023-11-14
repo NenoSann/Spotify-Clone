@@ -4,7 +4,7 @@
             <div class="w-10 h-10 flex justify-center items-center shrink-0">
                 <p>{{ order }}</p>
             </div>
-            <div class="daisy-avatar w-10 h-10 mr-4 shrink-0">
+            <div class="daisy-avatar w-10 h-10 mr-4 shrink-0" v-if="image_url">
                 <img :src="image_url">
             </div>
             <div class="flex flex-col items-start justify-center">
@@ -43,7 +43,7 @@
 import { playerState } from '@/store';
 const playerStore = playerState();
 const props = defineProps<{
-    image_url: string,
+    image_url: string | null
     track_name: string,
     artist_name: string | null
     album_name: string | null,
