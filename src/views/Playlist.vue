@@ -38,7 +38,7 @@
 import ColorThief from 'colorthief';
 import { getPlayList } from '@/api/playlist/getPlaylist';
 import type { PlayList } from '@/api/playlist/getPlaylist';
-import { onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import TheGallery from './component/TheGallery.vue';
 import TheTrackSection from './component/TheTrackSection.vue';
@@ -50,7 +50,7 @@ const listItem = ref<PlayList>();
 const onLoading = ref<boolean>(true);
 
 const list_image = ref<HTMLImageElement>();
-const list_primary_color = ref<string>('#000');
+const list_primary_color = ref<string>('#000000');
 const getPrimaryColor = function () {
     const colorThief = new ColorThief();
     const image = list_image.value;
@@ -71,6 +71,14 @@ const getPrimaryColor = function () {
     }
 }
 
+const computedBgCss = computed(() => {
+    return `background-color: ${list_primary_color.value};`
+})
+
+watch(list_primary_color, () => {
+    const listmain = document.querySelector('.list-main') as HTMLElement;
+})
+
 onMounted(async () => {
     await getPlayList(route.params.id as string).then((res) => {
         listItem.value = res;
@@ -79,6 +87,10 @@ onMounted(async () => {
         onLoading.value = false;
     });
     getPrimaryColor();
+    nextTick(() => {
+        const listMainElement = document.querySelector('.list-header');
+        listMainElement?.classList.add('transition-bg-color');
+    })
 })
 </script>
 
@@ -88,11 +100,16 @@ onMounted(async () => {
     @apply transition-all duration-500;
 }
 
+.list-header.transition-bg-color {
+    background-color: v-bind(list_primary_color)
+}
+
 .list-header {
-    @apply bg-[var(--list-primary-color)];
     @apply flex flex-row;
     @apply flex flex-row items-end;
     @apply px-6 pb-6;
+    @apply transition-all duration-500;
+    background-color: black;
 }
 
 .list-body {

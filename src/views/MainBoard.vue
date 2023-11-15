@@ -4,7 +4,7 @@
         <TopIcon :userinfo="userinfo"></TopIcon>
         <Greeting></Greeting>
         <Recommendation></Recommendation>
-        <MusicSection section-text="Made For NenoSan" ref="section"></MusicSection>
+        <MusicSection :section-text="`Made for ${userinfo.display_name}`" ref="section"></MusicSection>
     </div>
 </template>
 

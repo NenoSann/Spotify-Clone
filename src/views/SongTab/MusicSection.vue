@@ -4,8 +4,9 @@
             {{ text.sectionText }}
         </p>
         <TheGallery orientation="horizontal">
-            <TheCard :image_url="list.images[0].url" :card_type="list?.description" :card_name="list.name"
-                avatar_type="square" v-for="list in dailyMixed"></TheCard>
+            <TheCard :image_url="(list?.images[0].url as string)" :card_type="(list?.description as string)"
+                :card_name="(list?.name as string)" avatar_type="square" :route_url="`playlist/${list?.id}`"
+                v-for="list in dailyMixed"></TheCard>
         </TheGallery>
     </div>
 </template>

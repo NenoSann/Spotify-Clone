@@ -62,7 +62,7 @@ const addToPlaylist = () => {
 
 <style scoped>
 .track-section {
-    @apply w-full max-w-screen-xl h-14 p-2;
+    @apply w-full max-w-screen-2xl h-14 p-2;
     @apply flex flex-row;
     @apply bg-transparent;
     @apply rounded-md overflow-hidden;

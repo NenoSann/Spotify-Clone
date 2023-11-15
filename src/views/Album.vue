@@ -96,9 +96,10 @@ onMounted(async () => {
 }
 
 .album-header {
-    background-color: var(--album-primary-color);
     @apply flex flex-row items-end;
     @apply px-6 pb-6;
+    background-color: v-bind(album_primary_color);
+    @apply transition-all duration-500;
 }
 
 .album-main {
