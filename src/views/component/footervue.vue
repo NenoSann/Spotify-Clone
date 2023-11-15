@@ -9,7 +9,7 @@
             </svg>
             <div>
                 <p>Copyright © 2023 - All right reserved by Spotify Technology S.A.</p>
-                <p>Made with ❤️ by NenoSan</p>
+                <p>Made with ❤️ by <a href="https://github.com/NenoSann">NenoSan</a></p>
             </div>
         </aside>
         <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">

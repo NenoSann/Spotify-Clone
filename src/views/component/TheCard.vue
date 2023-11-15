@@ -6,7 +6,7 @@
         </div>
         <font-awesome-icon class="play-button group-hover:opacity-100" icon="fa-solid fa-circle-play fa-2xl" />
         <p class=" line-clamp-1 font-semibold text-white">{{ card_name }}</p>
-        <p class=" font-normal">{{ card_type }}</p>
+        <p class=" font-normal line-clamp-2">{{ card_type }}</p>
     </div>
 </template>
 

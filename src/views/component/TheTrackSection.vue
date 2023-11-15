@@ -5,7 +5,7 @@
                 <p>{{ order }}</p>
             </div>
             <div class="daisy-avatar w-10 h-10 mr-4 shrink-0" v-if="image_url">
-                <img :src="image_url">
+                <img :src="image_url" loading="lazy">
             </div>
             <div class="flex flex-col items-start justify-center">
                 <p class="track-name line-clamp-1">{{ track_name }}</p>

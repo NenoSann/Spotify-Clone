@@ -1,8 +1,8 @@
 <template>
-    <div class="song-icon-main">
+    <div class="song-icon-main group" @click="router.push(redirect_url ? redirect_url : '')">
         <div class="song-item">
-            <img class="song-image" :src="props.componentImage">
-            <p class="song-text">{{ props.componentName }}</p>
+            <img class="song-image" :src="props.image_url">
+            <p class="song-text">{{ props.tab_name }}</p>
             <font-awesome-icon class="play-button" icon="fa-solid fa-circle-play fa-2xl" />
         </div>
     </div>
@@ -10,55 +10,47 @@
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { useRouter } from 'vue-router'
+const router = useRouter();
 const props = defineProps({
-    componentName: String,
-    componentImage: String,
+    tab_name: String,
+    image_url: String,
+    redirect_url: String
 })
 
 
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 * {
     user-select: none;
 }
 
 .song-icon-main {
-    overflow: hidden;
-    background-color: transparent;
-    border-radius: 6px;
-
-    &:hover {
-        background-color: rgba($color: #ffffff, $alpha: 0.5);
-        transition: background-color .25s ease-in-out;
-        cursor: pointer;
-    }
-
-    &:not(:hover) {
-        background-color: transparent;
-        transition: background-color .25s ease-in-out;
-    }
+    @apply overflow-hidden bg-transparent rounded-md;
+    @apply hover:bg-white hover:bg-opacity-50 hover:cursor-pointer;
+    @apply transition-all duration-300;
 }
 
 
 .song-item {
-
-    display: flex;
-    background-color: rgba($color: #ffffff, $alpha: 0.2);
-    align-items: center;
+    @apply flex bg-white bg-opacity-20 items-center;
 }
 
 .song-image {
-    width: 70px;
+    @apply w-16;
 }
 
 .play-button {
-    // Can not use duotone icon without fa-pro, sad.
     margin-left: auto;
     margin-right: 20px;
     color: #1db954;
     font-size: 48px;
     background: transparent;
+    @apply opacity-0;
+    @apply group-hover:opacity-100;
+    @apply hover:scale-110;
+    @apply transition-all duration-300;
 }
 
 .song-text {

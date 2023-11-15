@@ -2,12 +2,13 @@
     <div class="list-main">
         <div class="list-header h-80 bg-black ">
             <div class="daisy-avatar w-52 h-52 shadow-2xl mr-6" :class="onLoading ? 'daisy-skeleton' : ''">
-                <img async ref="list_image" :src="listItem?.images[0].url" loading="lazy" v-if="listItem?.images">
+                <img async ref="list_image" class="w-full h-full" :src="listItem?.images[0].url" loading="lazy"
+                    v-if="listItem?.images">
             </div>
             <div class="flex flex-col justify-end text-white gap-6">
                 <p>播放列表</p>
                 <p class=" font-extrabold text-5xl">{{ listItem?.name }}</p>
-                <p>{{ listItem?.description }}</p>
+                <p v-html="listItem?.description"></p>
                 <div class="flex items-center leading-normal">
                     <div class="daisy-avatar h-8 w-8 inline-flex">
                         <img class="rounded-full">
@@ -20,12 +21,16 @@
                 </div>
             </div>
         </div>
-        <TheGallery orientation="vertical" style="gap: 0;">
-            <TheTrackSection :image_url="track.track.album.images[0].url" :track_name="track.track.name"
-                :album_name="track.track.album.name" :artist_name="track.track.artists[0].name"
-                v-for="track in listItem?.tracks.items">
-            </TheTrackSection>
-        </TheGallery>
+        <div class="list-body">
+            <TheGallery orientation="vertical" style="gap: 0;">
+                <TheTrackSection :image_url="track.track.album.images[0].url" :track_name="track.track.name"
+                    :album_name="track.track.album.name" :artist_name="track.track.artists[0].name"
+                    :spotify_uri="track.track.uri" :order="n + 1" v-for="(track, n) in listItem?.tracks.items"
+                    :track_duration="`${Math.floor(track.track.duration_ms / 1000 / 60)}:${Math.floor((track.track.duration_ms / 1000) % 60) > 9 ? Math.floor((track.track.duration_ms / 1000) % 60) : '0' + Math.floor((track.track.duration_ms / 1000) % 60)}`">
+                </TheTrackSection>
+            </TheGallery>
+            <footervue></footervue>
+        </div>
     </div>
 </template>
 
@@ -37,6 +42,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import TheGallery from './component/TheGallery.vue';
 import TheTrackSection from './component/TheTrackSection.vue';
+import footervue from './component/footervue.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -65,26 +71,39 @@ const getPrimaryColor = function () {
     }
 }
 
-onMounted(() => {
-    getPlayList(route.params.id as string).then((res) => {
+onMounted(async () => {
+    await getPlayList(route.params.id as string).then((res) => {
         listItem.value = res;
         onLoading.value = false;
-        getPrimaryColor();
     }).catch((error: Error) => {
         onLoading.value = false;
-    })
+    });
+    getPrimaryColor();
 })
 </script>
 
 <style scoped>
 .list-main {
+    --list-primary-color: v-bind(list_primary_color);
     @apply transition-all duration-500;
 }
 
 .list-header {
+    @apply bg-[var(--list-primary-color)];
     @apply flex flex-row;
     @apply flex flex-row items-end;
     @apply px-6 pb-6;
+}
+
+.list-body {
+    @apply bg-gradient-to-b from-[var(--list-primary-color)] via-transparent to-transparent;
+    @apply backdrop-blur-2xl;
+}
+
+.list-body::before {
+    @apply absolute bg-black bg-opacity-30 z-[-1] top-0 left-0 w-full h-full;
+    content: '';
+    pointer-events: none;
 }
 
 span::before {

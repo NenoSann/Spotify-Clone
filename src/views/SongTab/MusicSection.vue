@@ -1,50 +1,34 @@
 <template>
-    <div class="container">
+    <div class="section-container">
         <p class="section-name">
             {{ text.sectionText }}
         </p>
-        <div class="section">
-            <SongIconVer v-for="(info, index) in songIconInfo" :key=index :image=info.image :title=info.title
-                :artist=info.artist></SongIconVer>
-        </div>
+        <TheGallery orientation="horizontal">
+            <TheCard :image_url="list.images[0].url" :card_type="list?.description" :card_name="list.name"
+                avatar_type="square" v-for="list in dailyMixed"></TheCard>
+        </TheGallery>
     </div>
 </template>
 
 <script setup lang="ts">
-import SongIconVer from './SongIconVer.vue';
-const text = defineProps(['sectionText'])
+import TheCard from '@/views/component/TheCard.vue';
+import TheGallery from '../component/TheGallery.vue';
+import { getCurrentPlaylist } from '@/api/playlist/getCurrentPlaylist';
+import type { playlist } from '@/lib/interface';
+import { ref, onMounted, computed } from 'vue';
+const text = defineProps(['sectionText']);
+const playlists = ref<playlist>();
+const dailyMixed = computed(() => {
+    return playlists.value?.items.map((list) => {
+        if ((list.owner as any).id === 'spotify' && list.name.includes('每日推荐')) {
+            return list;
+        }
+    }).filter((list) => list !== undefined)
+})
+onMounted(async () => {
+    playlists.value = await getCurrentPlaylist(50);
+})
 
-let songIconInfo = [{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-{
-    image: 'src/assets/image/jacket_s_061.png',
-    title: 'Daily Mix 3',
-    artist: ['DECO*27', 'Reol', 'Eve', 'YUC\'c', 'Connor Price']
-},
-]
 
 
 
@@ -55,17 +39,8 @@ let songIconInfo = [{
     background-color: transparent;
 }
 
-.section {
-    height: 280px;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    column-gap: 1rem;
-    // overflow-y: hidden;
+.section-container {
+    @apply mx-8;
 }
 
 .section-name {
@@ -74,7 +49,6 @@ let songIconInfo = [{
     color: white;
     white-space: nowrap;
     background-color: transparent;
-    margin-left: 2rem;
     font-size: 1.6rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;

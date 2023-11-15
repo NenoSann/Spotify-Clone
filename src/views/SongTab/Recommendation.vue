@@ -1,15 +1,17 @@
 <template>
     <div class="recommendation-main">
-        <SongIconSm v-for="(songInfo, index) in songInfos" :key="index" :component-name="songInfo.songName"
-            :component-image="songInfo.songImage"></SongIconSm>
+        <SongIconSm v-for="(songInfo, index) in songInfos" :key="index" :tab_name="songInfo.songName"
+            :image_url="songInfo.songImage" :redirect_url="songInfo.redirect_url"></SongIconSm>
     </div>
 </template>
 
 <script setup lang="ts">
 import SongIconSm from './SongIconSm.vue';
+import { useRoute, useRouter } from 'vue-router';
+const router = useRouter();
 
 let songInfos = [
-    { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png" },
+    { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png", redirect_url: 'playlist/37i9dQZF1E35gNLXYvAaDO' },
     { songName: "Potato", songImage: "https://misc.scdn.co/liked-songs/liked-songs-640.png" },
     { songName: "Potato", songImage: "src/assets/image/jacket_s_052.png" },
     { songName: "Potato", songImage: "src/assets/image/jacket_s_061.png" },
